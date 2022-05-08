@@ -1,0 +1,13 @@
+name: Shiny_Sandbox
+title: Shiny_Sandbox
+username:
+account: ebj8
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 6252591
+bundleId: 5882719
+url: https://ebj8.shinyapps.io/Shiny_Sandbox/
+when: 1651979428.9059
+lastSyncTime: 1651979428.9059
+asMultiple: FALSE
+asStatic: FALSE
