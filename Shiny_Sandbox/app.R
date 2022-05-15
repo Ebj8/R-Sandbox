@@ -1,33 +1,39 @@
 library(shiny)
 library(officer)
 library(flextable)
-library(dplyr)
+library(tidyverse)
 
-my_table <- data.frame(
-    Name = letters[1:4],
-    Age = seq(20, 26, 2),
-    Occupation = LETTERS[15:18],
-    Income = c(50000, 20000, 30000, 45000)
-)
 
-ui <- fluidRow(
+ui <- fluidPage(
+  
     column(
+      titlePanel("Markdown to Powerpoint"),
         width = 12,
         align = "center",
         tableOutput("data"),
         br(),
         fileInput("file1","Upload R markdown file", accept = ".Rmd"),
         br(),
+      textOutput("file_head"),
+      br(),
         downloadButton("download_powerpoint", "Download Data to PowerPoint")
     )
 )
 
 server <- function(input, output) {
-    output$data <- renderTable({
-        my_table
-    })
+  
+  output$file_head <- renderText({
+    report <- input$file1 
     
-    output$download_powerpoint <- downloadHandler(
+    req(report)
+    
+    f <- str_split(read_file(report),"\r\n")
+    print(f[[1]][1])
+  })
+    
+   
+  
+  output$download_powerpoint <- downloadHandler(
         filename = function() {  
             "employee_data.pptx"
         },
